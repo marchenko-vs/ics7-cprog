@@ -1,0 +1,30 @@
+Alpine F1 Team
+2013
+0
+Alfa Romeo Racing
+2012
+0
+Scuderia AlphaTauri
+2011
+0
+Aston Martin F1 Team
+2010
+0
+McLaren F1 Team
+2009
+8
+Mercedes AMG Petronas F1
+2008
+7
+Red Bull Racing
+2007
+4
+Williams Racing
+2006
+9
+Scuderia Ferrari
+2005
+16
+Haas F1 Team
+2004
+0

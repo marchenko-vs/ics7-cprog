@@ -1,0 +1,42 @@
+CC := gcc
+SRC_DIR := src/
+OUT_DIR := out/
+INC_DIR := inc/
+UNIT_DIR := unit_tests/
+CFLAGS := -std=c99 -Wall -Werror -Wvla -pedantic
+OBJS := $(OUT_DIR)main.o
+
+app.exe : $(OBJS) array.dll
+	$(CC) $< -L. -larray -o app.exe
+
+$(OUT_DIR)main.o : src/dl_main.c
+	mkdir -p $(OUT_DIR)
+	$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $(OUT_DIR)main.o
+
+$(OUT_DIR)check_main.o: $(UNIT_DIR)check_main.c $(INC_DIR)check_funcs.h $(INC_DIR)array.h $(INC_DIR)sort.h
+	mkdir -p $(OUT_DIR)
+	$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $(OUT_DIR)check_main.o
+
+$(OUT_DIR)check_key.o: $(UNIT_DIR)check_key.c $(INC_DIR)check_funcs.h $(INC_DIR)array.h
+	$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $(OUT_DIR)check_key.o
+
+$(OUT_DIR)check_mysort.o: $(UNIT_DIR)check_mysort.c $(INC_DIR)check_funcs.h $(INC_DIR)sort.h
+	$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $(OUT_DIR)check_mysort.o
+
+array.dll : $(OUT_DIR)array.o $(OUT_DIR)sort.o
+	$(CC) -shared $^ -Wl,--subsystem,windows -o array.dll
+
+$(OUT_DIR)array.o: $(SRC_DIR)dl_array.c $(INC_DIR)dl_array.h
+	mkdir -p $(OUT_DIR)
+	$(CC) $(CFLAGS) -D ARRAY_EXPORTS -I $(INC_DIR) -c $< -o $(OUT_DIR)array.o
+
+$(OUT_DIR)sort.o: $(SRC_DIR)dl_sort.c $(INC_DIR)dl_sort.h
+	$(CC) $(CFLAGS) -D ARRAY_EXPORTS -I $(INC_DIR) -c $< -o $(OUT_DIR)sort.o
+
+.PHONY : func clean
+
+func :
+	bash make_func.sh
+
+clean :
+	rm -rf *.dll *.exe out/

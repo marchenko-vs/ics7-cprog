@@ -1,0 +1,49 @@
+CC := gcc
+SRC_DIR := src/
+OUT_DIR := out/
+INC_DIR := inc/
+UNIT_DIR := unit_tests/
+CFLAGS := -std=c99 -Wall -Werror -Wvla -pedantic
+OBJS := $(OUT_DIR)main.o $(OUT_DIR)array.o $(OUT_DIR)sort.o
+UNIT_OBJS := $(OUT_DIR)check_main.o $(OUT_DIR)check_key.o $(OUT_DIR)check_mysort.o
+
+app.exe : $(OBJS) libarray.a
+	$(CC) $(OUT_DIR)main.o -L. -larray -o app.exe
+
+unit_tests.exe : $(UNIT_OBJS) libarray.a
+	$(CC) $^ -L. -larray -lcheck -o unit_tests.exe
+
+$(OUT_DIR)main.o : src/main.c $(INC_DIR)array.h $(INC_DIR)sort.h
+	mkdir -p $(OUT_DIR)
+	$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $(OUT_DIR)main.o
+
+$(OUT_DIR)array.o: src/array.c $(INC_DIR)array.h
+	mkdir -p $(OUT_DIR)
+	$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $(OUT_DIR)array.o
+
+$(OUT_DIR)sort.o: src/sort.c $(INC_DIR)sort.h
+	$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $(OUT_DIR)sort.o
+
+$(OUT_DIR)check_main.o: $(UNIT_DIR)check_main.c
+	mkdir -p $(OUT_DIR)
+	$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $(OUT_DIR)check_main.o
+
+$(OUT_DIR)check_key.o: $(UNIT_DIR)check_key.c $(INC_DIR)array.h
+	$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $(OUT_DIR)check_key.o
+
+$(OUT_DIR)check_mysort.o: $(UNIT_DIR)check_mysort.c $(INC_DIR)sort.h
+	$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $(OUT_DIR)check_mysort.o
+
+libarray.a : $(OUT_DIR)array.o $(OUT_DIR)sort.o
+	ar cr libarray.a $(OUT_DIR)array.o $(OUT_DIR)sort.o
+
+.PHONY : unit func clean
+
+unit : unit_tests.exe
+	./unit_tests.exe
+
+func :
+	bash make_func.sh
+
+clean :
+	rm -rf *.exe *.a out/

@@ -1,0 +1,1 @@
+a neg_10_1_in.txt neg_10_2_in.txt output.txt

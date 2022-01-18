@@ -1,0 +1,30 @@
+Alpine F1 Team
+2021
+0
+Alfa Romeo Racing
+2019
+0
+Scuderia AlphaTauri
+2020
+0
+Aston Martin Cognizant Formula One Team
+2021
+0
+McLaren F1 Team
+1963
+8
+Mercedes AMG Petronas Motorsport
+2010
+8
+Red Bull Racing
+2005
+5
+Williams Racing
+1969
+9
+Scuderia Ferrari
+1950
+16
+Haas F1 Team
+2016
+0

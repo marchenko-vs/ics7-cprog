@@ -1,0 +1,15 @@
+Cola
+40
+10
+Pepsi
+30
+10
+Sprite
+20
+10
+Cows
+50
+5
+Chips
+10
+2

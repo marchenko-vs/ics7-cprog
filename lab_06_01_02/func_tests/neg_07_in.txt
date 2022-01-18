@@ -1,0 +1,48 @@
+First struct
+10
+5
+Second struct
+5
+10
+Third struct
+3
+9
+Fourth struct
+15
+3
+Fifth struct
+10
+5
+Sixth struct
+53
+10
+Seventh struct
+35
+96
+Eighth struct
+15
+36
+Ninth struct
+10
+52
+Tenth struct
+53
+10
+Eleventh struct
+34
+9
+Twelvth struct
+19
+33
+Thirteenth struct
+10
+53
+Fourteenth struct
+0.5
+13
+Fifteenth struct
+6.5
+6
+Last struct
+10
+9

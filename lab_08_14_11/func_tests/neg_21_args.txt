@@ -1,0 +1,1 @@
+o neg_20_in.txt output.txt
